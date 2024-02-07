@@ -17,6 +17,9 @@ def create_pinecone_retriever_tool(index_name):
             # to [0, 1] range from pinecone's [-1,1]. So (0.8 + 1) / 2 = 0.9
             "score_threshold": 0.9,
             "k": 1,
+            # Use filter to only return documents with version v2.1.1.
+            # TODO: Agent should be able to specify the version of the document it wants to retrieve.
+            "filter": {"version": "v2.1.1"},
         },
     )
 

@@ -41,7 +41,9 @@ agent_prompt = ChatPromptTemplate(
     messages=[
         SystemMessagePromptTemplate(
             prompt=PromptTemplate(
-                input_variables=[], template="You are a helpful assistant"
+                input_variables=[],
+                template="""You are a helpful assistant, with access to IBM Python Generative AI SDK.
+If the question is about the SDK, always use search_ibm_generative_ai_sdk retriever tool to search for the answer.""",
             )
         ),
         MessagesPlaceholder(variable_name="chat_history", optional=True),
