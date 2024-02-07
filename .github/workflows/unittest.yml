@@ -17,4 +17,4 @@ jobs:
         pip install -r requirements.txt
     - name: Test with unittest
       run: |
-        python -m unittest discover -s ./app -p *_test.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+        python -m unittest discover -s ./app -p '*_test.py'
