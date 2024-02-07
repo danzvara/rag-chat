@@ -1,6 +1,7 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import Message from "./Message";
 import { v4 as uuidv4 } from "uuid";
+import { useToasts } from 'react-toast-notifications';
 
 import { useChat, Message as AiMessage } from "ai/react";
 import { isDevelopment } from "../utils";
@@ -21,6 +22,7 @@ const Chat: React.FC = React.memo(() => {
     messages,
     input,
     isLoading,
+    error,
     handleInputChange,
     handleSubmit,
     stop,
@@ -32,6 +34,14 @@ const Chat: React.FC = React.memo(() => {
       sessionId: sessionId.current,
     },
   });
+
+  const { addToast } = useToasts();
+
+  useEffect(() => {
+    if (error) {
+      addToast(error.message, { appearance: 'error' });
+    }
+  }, [error, addToast]);
 
   const clearChat = useCallback(() => {
     stop();
