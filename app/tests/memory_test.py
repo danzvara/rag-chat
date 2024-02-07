@@ -3,7 +3,7 @@ import unittest
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 
-from app.memory import ConversationSummaryBufferMemoryWithSummary
+from memory import ConversationSummaryBufferMemoryWithSummary
 
 load_dotenv()
 
