@@ -5,8 +5,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      OPENAI_API_KEY: ${{ env.OPENAI_API_KEY }}
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
@@ -18,5 +16,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Test with unittest
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
         python -m unittest discover -s ./app -p '*_test.py'
