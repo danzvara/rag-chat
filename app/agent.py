@@ -2,20 +2,19 @@ from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain_community.chat_models.openai import ChatOpenAI
 from langchain.memory.chat_memory import BaseChatMemory
 import json
+import os
 
 from tools import (
-    create_retriever_tool,
+    create_pinecone_retriever_tool,
     create_google_search_tool,
     create_python_repl_tool,
 )
 from prompt import agent_prompt
 
-index_name = "langchain-demo"
-
 
 def create_agent(memory: BaseChatMemory):
     tools = [
-        create_retriever_tool(index_name),
+        create_pinecone_retriever_tool(os.environ["PINECONE_INDEX_NAME"]),
         create_google_search_tool(),
         create_python_repl_tool(),
     ]
