@@ -9,7 +9,6 @@ load_dotenv()
 
 
 class TestMemory(unittest.TestCase):
-
     def test_summary_refresh(self):
         memory = ConversationSummaryBufferMemoryWithSummary(
             max_token_limit=1000,

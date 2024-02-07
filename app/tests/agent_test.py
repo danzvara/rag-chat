@@ -12,10 +12,8 @@ class MockDataChunk:
 
 
 class TestAgent(unittest.TestCase):
-
     @patch.object(Agent, "astream_events", new_callable=AsyncMock())
     async def test_streaming(self, mock_astream_events):
-
         mock_astream_events.return_value = [
             {
                 "event": {"event": "on_chat_model_stream"},
@@ -33,7 +31,6 @@ class TestAgent(unittest.TestCase):
 
     @patch.object(Agent, "astream_events", new_callable=AsyncMock())
     async def test_streaming_annotations(self, mock_astream_events):
-
         mock_astream_events.return_value = [
             {
                 "event": {"event": "on_tool_start"},
