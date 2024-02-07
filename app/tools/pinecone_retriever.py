@@ -3,7 +3,7 @@ from langchain.tools.retriever import create_retriever_tool
 from langchain_openai import OpenAIEmbeddings
 
 
-def create_retriever_tool(index_name):
+def create_pinecone_retriever_tool(index_name):
     """Creates a retriever tool for the given index."""
 
     embeddings = OpenAIEmbeddings()
