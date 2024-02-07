@@ -20,6 +20,7 @@ const Chat: React.FC = React.memo(() => {
   const {
     messages,
     input,
+    isLoading,
     handleInputChange,
     handleSubmit,
     stop,
@@ -33,9 +34,10 @@ const Chat: React.FC = React.memo(() => {
   });
 
   const clearChat = useCallback(() => {
+    stop();
     setMessages([INITIAL_MESSAGE]);
     sessionId.current = uuidv4();
-  }, [setMessages]);
+  }, [setMessages, stop]);
 
   return (
     <div
@@ -85,10 +87,11 @@ const Chat: React.FC = React.memo(() => {
                 style={{ width: "7rem", backgroundColor: "lightblue" }}
                 type="submit"
                 color="blue"
+                disabled={!input || input === "" || isLoading}
               >
                 Send
               </button>
-              <button type="reset" onClick={stop}>
+              <button type="reset" onClick={stop} disabled={!isLoading}>
                 Stop generation
               </button>
               <button type="reset" onClick={clearChat}>
