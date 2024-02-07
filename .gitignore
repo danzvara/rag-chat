@@ -5,8 +5,6 @@ node_modules
 dist
 *.local
 
-.vscode/*
-!.vscode/extensions.json
 .DS_Store
 
 .vercel
