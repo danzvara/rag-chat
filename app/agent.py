@@ -13,6 +13,11 @@ from prompt import agent_prompt
 
 
 def create_agent(memory: BaseChatMemory):
+    """
+    Create an agent with the provided memory and with tools.
+
+    Agent is capped at 3 iterations to prevent long loops / runaway executions.
+    """
     tools = [
         create_pinecone_retriever_tool(os.environ["PINECONE_INDEX_NAME"]),
         create_google_search_tool(),
@@ -36,6 +41,13 @@ def create_agent(memory: BaseChatMemory):
 
 
 async def stream_output_with_annotations(agent: AgentExecutor, inputs):
+    """
+    Helper for streaming structured output with message annotations from the agent.
+
+    We're using Vercel's AI SDK on the client, which implements structured streaming
+    by sending chunks prefixed with a message type. However they don't provide Python SDK
+    for the server side, so I'm implementing the streaming protocol manually here.
+    """
     tool_name, source_path = None, None
     streaming_content = False
 

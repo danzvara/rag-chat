@@ -8,6 +8,12 @@ from langchain.prompts import (
     HumanMessagePromptTemplate,
 )
 
+"""
+This is a prompt template for the agent. It is based on hwchase17/openai-functions-agent
+prompt, but with modifications to include chat summary and hints to prefer retrieval from
+the pinecone retriever tool.
+"""
+
 agent_prompt = ChatPromptTemplate(
     input_variables=["agent_scratchpad", "input"],
     input_types={
