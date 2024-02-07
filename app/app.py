@@ -1,5 +1,4 @@
 from typing import Dict
-import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
@@ -40,7 +39,7 @@ app.add_middleware(
 )
 
 
-@app.route("/health")
+@app.get("/health")
 def index():
     return "OK"
 
@@ -77,7 +76,3 @@ async def chat(data: ChatRequest):
     return StreamingResponse(
         output_stream, headers={"X-Experimental-Stream-Data": "true"}
     )
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, port=3001, host="localhost")
