@@ -25,9 +25,7 @@ memories: Dict[str, ConversationSummaryBufferMemoryWithSummary] = {}
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000",
-]
+origins = ["http://localhost:3000", "https://rag-chat.vercel.app"]
 
 app.add_middleware(
     CORSMiddleware,

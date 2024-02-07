@@ -3,12 +3,17 @@ import Message from "./Message";
 import { v4 as uuidv4 } from "uuid";
 
 import { useChat, Message as AiMessage } from "ai/react";
+import { isDevelopment } from "../utils";
 
 const INITIAL_MESSAGE: AiMessage = {
   role: "assistant",
   content: "Hi there! How can I help you?",
   id: "1",
 };
+
+const CHAT_ENDPOINT = isDevelopment()
+  ? "http://localhost:3001/api/chat"
+  : "https://rag-chat-backend.onrender.com/api/chat";
 
 const Chat: React.FC = React.memo(() => {
   const sessionId = useRef(uuidv4());
@@ -20,7 +25,7 @@ const Chat: React.FC = React.memo(() => {
     stop,
     setMessages,
   } = useChat({
-    api: "http://localhost:3001/api/chat",
+    api: CHAT_ENDPOINT,
     initialMessages: [INITIAL_MESSAGE],
     body: {
       sessionId: sessionId.current,
