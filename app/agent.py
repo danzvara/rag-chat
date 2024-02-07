@@ -53,7 +53,6 @@ async def stream_output_with_annotations(agent: AgentExecutor, inputs):
 
     async for event in agent.astream_events(inputs, version="v1"):
         kind = event["event"]
-
         if kind == "on_retriever_end":
             output = event["data"]["output"]
             documents = output["documents"]
