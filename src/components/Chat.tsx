@@ -99,7 +99,7 @@ const Chat: React.FC = React.memo(() => {
                 color="blue"
                 disabled={!canSubmit}
               >
-                Send
+                {isLoading && <i className="fa fa-refresh fa-spin"></i>}{' '}Send
               </button>
             </div>
             <div>
