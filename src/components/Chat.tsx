@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import Message from "./Message";
 import { v4 as uuidv4 } from "uuid";
 import { useToasts } from 'react-toast-notifications';
@@ -36,6 +36,8 @@ const Chat: React.FC = React.memo(() => {
   });
 
   const { addToast } = useToasts();
+
+  const canSubmit = useMemo(() => Boolean(input) && !isLoading, [isLoading, input]);
 
   useEffect(() => {
     if (error) {
@@ -89,22 +91,22 @@ const Chat: React.FC = React.memo(() => {
               })}
           </div>
           <div>
-            <div style={{ width: "100%" }}>
-              <input value={input} onChange={handleInputChange} />
-            </div>
-            <div>
+            <div style={{ display: "flex", marginBottom: "10px", marginLeft: "5px" }}>
+              <input style={{ width: "300px", padding: "10px", borderRadius: "10px" }} value={input} onChange={handleInputChange} />
               <button
-                style={{ width: "7rem", backgroundColor: "lightblue" }}
+                style={{ width: "7rem", backgroundColor: canSubmit ? "lightblue" : "lightgray", marginLeft: "5px" }}
                 type="submit"
                 color="blue"
-                disabled={!input || input === "" || isLoading}
+                disabled={!canSubmit}
               >
                 Send
               </button>
+            </div>
+            <div>
               <button type="reset" onClick={stop} disabled={!isLoading}>
                 Stop generation
               </button>
-              <button type="reset" onClick={clearChat}>
+              <button style={{ marginLeft: "5px" }} type="reset" onClick={clearChat}>
                 Clear chat
               </button>
             </div>
